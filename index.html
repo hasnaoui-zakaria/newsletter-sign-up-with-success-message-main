@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Newsletter sign-up form with success message</title>
+  <link rel="stylesheet" href="./styles.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { display:none; font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <!-- Sign-up form start -->
+  <main>
+    <div class="form" id="form">
+      <div class="image"></div>
+      <div class="signUp">
+        <h1>Stay updated!</h1>
+
+        <article>Join 60,000+ product managers receiving monthly updates on:</article>
+        <ul>
+          <li>Product discovery and building what matters</li>
+          <li>Measuring to ensure updates are a success</li>
+          <li>And much more!</li>
+        </ul>
+        <div>
+          <label for="email"><p>Email address<p></p><span class="hide">Valid email required</span></label>
+          <input type="email" placeholder="email@company.com" id="email">
+          <button type="submit" id="subscribe">Subscribe to monthly newsletter</button>
+        </div>
+      </div>
+    </div>
+    <!-- Sign-up form end -->
+
+    <!-- Success message start -->
+    <div class="success hide" id="success">
+      <img class="icon" alt="success icon" src="./assets/images/icon-success.svg">
+      <h1>Thanks for subscribing!</h1>
+
+      <article>A confirmation email has been sent to <b id="address">ash@loremcompany.com</b>. 
+      Please open it and click the button inside to confirm your subscription.</article>
+      <button class="dismiss" id="dismiss">Dissmiss message</button>
+    </div>
+    <!-- Success message end -->
+    
+    <div class="attribution">
+      Challenge by <a rel="noopener" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </main>
+  <script>    
+    const form = document.getElementById('form');
+    const success = document.getElementById('success');
+
+
+    const dismiss = document.getElementById('dismiss');
+    const subscribe = document.getElementById('subscribe');
+
+    const email = document.getElementById('email');
+    const span = document.querySelector('span'); 
+    const address = document.getElementById('address');
+
+    function checkEmail () {
+      let re = /\S+@\S+\.\S+/;
+      if (email.value == "" || !email.value.match(re)) {
+        console.log(email)
+        span.classList.remove("hide");
+        email.classList.add("alert")
+      } else {
+        address.innerText = email.value
+        form.classList.add('hide')
+        success.classList.remove('hide')
+        span.classList.add('hide');
+        email.classList.remove('alert')
+      }
+    }
+
+    function dismission () {
+      form.classList.remove('hide');
+      success.classList.add('hide');
+      span.classList.add('hide');
+      console.log('dismiss click');
+    }
+
+    subscribe.addEventListener('click', (e) => {
+      checkEmail()
+    })
+    
+    dismiss.addEventListener('click', (e) => {
+      dismission();
+    })
+
+  </script>
+</body>
+</html>
